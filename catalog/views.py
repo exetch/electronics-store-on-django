@@ -1,11 +1,15 @@
 from django.shortcuts import render
+from catalog.models import Product, Contact
 def home_view(request):
-    # отображение домашней страницы
-    return render(request, 'catalog/home.html')
+    latest_products = Product.objects.order_by('date_created')[:5]
+    for product in latest_products:
+        print(f"Product Name: {product.name}, Price: {product.purchase_price}")
+    context = {'latest_products': latest_products}
+    return render(request, 'catalog/home.html', context)
 
 def contact_view(request):
-    # отображение страницы с контактной информацией
-    return render(request, 'catalog/contact.html')
+    contacts = Contact.objects.all()
+    return render(request, 'catalog/contact.html', {'contacts': contacts})
 
 def contact_submit_view(request):
     if request.method == 'POST':

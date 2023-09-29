@@ -1,0 +1,82 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Ноутбуки",
+      "description": "Портативные компьютеры"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Смартфоны",
+      "description": "Мобильные устройства"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Телевизоры",
+      "description": "Телевизионные аппараты"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Планшеты",
+      "description": "Планшетные компьютеры"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Наушники",
+      "description": "Аудиоаксессуары"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Камеры",
+      "description": "Фото- и видеокамеры"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Игровые консоли",
+      "description": "Игровые платформы"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+      "name": "Аксессуары",
+      "description": "Дополнительные устройства"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+      "name": "Умные устройства",
+      "description": "IoT-технологии"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+      "name": "Аудиоаппаратура",
+      "description": "Звуковое оборудование"
+    }
+  }
+]
