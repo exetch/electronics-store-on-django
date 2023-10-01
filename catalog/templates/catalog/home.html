@@ -1,8 +1,7 @@
-
 {% extends 'catalog/base.html' %}
-
-{% block title %}Skystore{% endblock %}
 {% load media_filters %}
+{% block title %}Skystore{% endblock %}
+
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Skystore</h1>
@@ -13,7 +12,7 @@
     {% for product in latest_products %}
     <div class="col-3">
         <div class="card mb-4 box-shadow">
-            <img src="{{ object.image|mediapath }}" alt="{{ object.name }}" />
+            <img src="{{ product.image|mediapath }}" alt="{{ product.name }}" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.description|truncatechars:100 }}</p>
