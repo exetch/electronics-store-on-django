@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from catalog.models import Product, Contact
 def home_view(request):
     latest_products = Product.objects.order_by('date_created')[:5]
@@ -23,3 +23,12 @@ def contact_submit_view(request):
         return render(request, 'catalog/success.html')
 
     return render(request, 'contacts.html')
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import Product
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'catalog/product_detail.html', {'product': product})
