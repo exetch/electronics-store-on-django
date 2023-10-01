@@ -1,0 +1,180 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+      "name": "═юєЄсєъш",
+      "description": "╧юЁЄрЄштэ√х ъюья№■ЄхЁ√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 11,
+    "fields": {
+      "name": "╤ьрЁЄЇюэ√",
+      "description": "╠юсшы№э√х єёЄЁющёЄтр"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 12,
+    "fields": {
+      "name": "╥хыхтшчюЁ√",
+      "description": "╥хыхтшчшюээ√х ряярЁрЄ√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 13,
+    "fields": {
+      "name": "╧ырэ°хЄ√",
+      "description": "╧ырэ°хЄэ√х ъюья№■ЄхЁ√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 14,
+    "fields": {
+      "name": "═рє°эшъш",
+      "description": "└єфшюръёхёёєрЁ√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 15,
+    "fields": {
+      "name": "╩рьхЁ√",
+      "description": "╘юЄю- ш тшфхюърьхЁ√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 16,
+    "fields": {
+      "name": "╚уЁют√х ъюэёюыш",
+      "description": "╚уЁют√х яырЄЇюЁь√"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 17,
+    "fields": {
+      "name": "└ъёхёёєрЁ√",
+      "description": "─юяюыэшЄхы№э√х єёЄЁющёЄтр"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 18,
+    "fields": {
+      "name": "╙ьэ√х єёЄЁющёЄтр",
+      "description": "IoT-Єхїэюыюушш"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 19,
+    "fields": {
+      "name": "└єфшюряярЁрЄєЁр",
+      "description": "╟тєъютюх юсюЁєфютрэшх"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "═юєЄсєъ Dell XPS 13",
+      "description": "╧юЁЄрЄштэ√щ эюєЄсєъ ё т√ёюъшь ЁрчЁх°хэшхь ¤ъЁрэр",
+      "image": "products/┴хч_эрчтрэш .jpeg",
+      "category": 10,
+      "purchase_price": "192000.00",
+      "date_created": "2023-09-29T09:47:24.858Z",
+      "date_modified": "2023-09-29T09:47:24.858Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "═юєЄсєъ HP Spectre x360",
+      "description": "╩юэтхЁЄшЁєхь√щ эюєЄсєъ ё OLED-¤ъЁрэюь",
+      "image": "products/hn4blynqi5gaq1sgzrmxidbrjwlrgbe2.jpg",
+      "category": 10,
+      "purchase_price": "136000.00",
+      "date_created": "2023-09-29T09:49:12.695Z",
+      "date_modified": "2023-09-29T09:49:12.695Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "╤ьрЁЄЇюэ iPhone 13 Pro",
+      "description": "╠ю∙э√щ ёьрЁЄЇюэ ё ърьхЁющ т√ёюъюую ЁрчЁх°хэш ",
+      "image": "products/30059057bb-max-350.jpg",
+      "category": 11,
+      "purchase_price": "74000.00",
+      "date_created": "2023-09-29T09:50:38.020Z",
+      "date_modified": "2023-09-29T09:50:38.020Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "╤ьрЁЄЇюэ Samsung Galaxy S21",
+      "description": "╤ьрЁЄЇюэ ё  Ёъшь AMOLED-¤ъЁрэюь",
+      "image": "products/70ba7a935e2d8f5b939beb5d0c06e63d.jpg",
+      "category": 11,
+      "purchase_price": "45000.00",
+      "date_created": "2023-09-29T09:54:49.035Z",
+      "date_modified": "2023-09-29T09:54:49.035Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "╥хыхтшчюЁ LG OLED C1",
+      "description": "4K OLED-ЄхыхтшчюЁ ё HDR",
+      "image": "products/5ae452212467ec457de69cd691018d56.jpg",
+      "category": 12,
+      "purchase_price": "55000.00",
+      "date_created": "2023-09-29T09:58:35.830Z",
+      "date_modified": "2023-09-29T09:58:35.830Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "╥хыхтшчюЁ Sony Bravia X90J",
+      "description": "LED-ЄхыхтшчюЁ ё т√ёюъющ  ЁъюёЄ№■",
+      "image": "products/2_691528-2443x1614-1.jpeg",
+      "category": 12,
+      "purchase_price": "113000.00",
+      "date_created": "2023-09-29T10:00:17.063Z",
+      "date_modified": "2023-09-29T10:00:17.063Z"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+      "name": "─шЁхъЄюЁ",
+      "email": "gena_samiy_glavniy@mail.com",
+      "phone": "+79096124456",
+      "address": "╠юёътр, ╩Ёхьы№"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 2,
+    "fields": {
+      "name": "╤тхЄюўър",
+      "email": "sveta@net.net",
+      "phone": "88005553535",
+      "address": "╬ЁхэсєЁу, ╤шсшЁёъшщ ЄЁръЄ, 115, ът.5"
+    }
+  }
+]
