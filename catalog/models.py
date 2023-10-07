@@ -1,5 +1,6 @@
 from django.db import models
 
+
 NULLABLE = {'null': True, 'blank': True}
 class Category(models.Model):
     name = models.CharField(max_length=255, verbose_name="Наименование")
@@ -40,3 +41,4 @@ class Contact(models.Model):
     class Meta:
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
+

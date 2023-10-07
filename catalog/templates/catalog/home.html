@@ -17,6 +17,7 @@
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.description|truncatechars:100 }}</p>
                 <h1 class="card-title pricing-card-title">{{ product.purchase_price|floatformat:"0" }} ₽</h1>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">Показать детали</a>
             </div>
         </div>
     </div>
