@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Skystore: Выбор активной версии{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Выбор активной версии</h1>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {% for version in versions %}
+                <li>
+                    <input type="radio" name="active_version" value="{{ version.id }}">
+                    {{ version }}
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit" class="btn btn-primary">Выбрать активную версию</button>
+    </form>
+</div>
+{% endblock %}
