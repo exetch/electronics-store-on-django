@@ -23,6 +23,13 @@
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description|truncatechars:100 }}</p>
                     <h1 class="card-title pricing-card-title">{{ product.purchase_price|floatformat:"0" }} ₽</h1>
+
+                    {% if product.active_version %}
+                        <p class="text-success">Активная версия: {{ product.active_version.version_name }}</p>
+                    {% else %}
+                        <p class="text-danger">Нет активной версии</p>
+                    {% endif %}
+
                     <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary">Показать детали</a>
                 </div>
             </div>
@@ -31,3 +38,4 @@
     </div>
 </div>
 {% endblock %}
+

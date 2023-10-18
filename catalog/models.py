@@ -42,4 +42,15 @@ class Contact(models.Model):
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
 
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Продукт")
+    version_number = models.CharField(max_length=50, verbose_name="Номер версии")
+    version_name = models.CharField(max_length=255, verbose_name="Название версии")
+    is_active = models.BooleanField(default=False, verbose_name="Текущая версия")
 
+    def __str__(self):
+        return f"{self.product} - Версия {self.version_number}"
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
