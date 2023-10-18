@@ -1,14 +1,24 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView
+from .forms import ProductForm, VersionForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
-from catalog.models import Product, Contact
+from catalog.models import Product, Contact, Version
+
 class HomeListView(ListView):
     model = Product
     template_name = 'catalog/home.html'
     context_object_name = 'latest_products'
     ordering = ['date_created']
-    paginate_by = 5
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for product in context['latest_products']:
+            active_version = Version.objects.filter(product=product, is_active=True).last()
+            product.active_version = active_version
+        return context
+
 
 
 class ContactListView(ListView):
@@ -33,3 +43,44 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    def get_success_url(self):
+        return reverse_lazy('product_detail', args=[self.object.pk])
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('product_detail', args=[self.object.pk])
+
+    def post(self, request, *args, **kwargs):
+        if "add_version" in request.POST:
+            product_id = self.kwargs['pk']
+            return redirect('create_version', product_id=product_id)
+        else:
+            return super().post(request, *args, **kwargs)
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('home')
+
+class CreateVersionView(CreateView):
+    model = Version
+    form_class = VersionForm
+    template_name = 'catalog/version_form.html'
+
+    def get_form_kwargs(self):
+        form_kwargs = super(CreateVersionView, self).get_form_kwargs()
+        product = get_object_or_404(Product, pk=self.kwargs['product_id'])
+        form_kwargs['instance'] = Version(product=product)
+        return form_kwargs
+
+    def get_success_url(self):
+        return reverse_lazy('product_detail', args=[self.kwargs['product_id']])

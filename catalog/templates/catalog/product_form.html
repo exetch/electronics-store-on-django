@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Skystore: Создание/Редактирование продукта{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Создание/Редактирование продукта</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a class="btn btn-secondary" href="{% url 'home' %}">Отмена</a>
+        <button type="submit" class="btn btn-secondary" name="add_version">Добавить версию продукта</button>
+    </form>
+</div>
+{% endblock %}
