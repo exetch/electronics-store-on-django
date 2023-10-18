@@ -83,4 +83,25 @@ class CreateVersionView(CreateView):
         return form_kwargs
 
     def get_success_url(self):
-        return reverse_lazy('product_detail', args=[self.kwargs['product_id']])
+        return reverse_lazy('choose_active_version', args=[self.kwargs['product_id']])
+
+
+class ChooseActiveVersionView(View):
+    template_name = 'catalog/choose_active_version.html'
+
+    def get(self, request, product_id):
+        versions = Version.objects.filter(product_id=product_id)
+        return render(request, self.template_name, {'versions': versions})
+
+    def post(self, request, product_id):
+        active_version_id = request.POST.get('active_version')
+        product_versions = Version.objects.filter(product_id=product_id)
+
+        for version in product_versions:
+            if str(version.id) == active_version_id:
+                version.is_active = True
+            else:
+                version.is_active = False
+            version.save()
+
+        return redirect('home')
