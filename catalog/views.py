@@ -1,10 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .forms import ProductForm, VersionForm
+from .forms import ProductForm, VersionForm, CategoryForm, CategoryFilterForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-from catalog.models import Product, Contact, Version
+from catalog.models import Product, Contact, Version, Category
+
 
 class HomeListView(ListView):
     model = Product
@@ -12,13 +14,24 @@ class HomeListView(ListView):
     context_object_name = 'latest_products'
     ordering = ['date_created']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category_filter = self.request.GET.get('category', None)
+        if category_filter:
+            queryset = queryset.filter(category=category_filter)
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['category_filter_form'] = CategoryFilterForm(self.request.GET)
         for product in context['latest_products']:
             active_version = Version.objects.filter(product=product, is_active=True).last()
             product.active_version = active_version
         return context
-
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+    context_object_name = 'categories'
 
 
 class ContactListView(ListView):
@@ -44,14 +57,18 @@ class ProductDetailView(DetailView):
     template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('product_detail', args=[self.object.pk])
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -66,12 +83,12 @@ class ProductUpdateView(UpdateView):
         else:
             return super().post(request, *args, **kwargs)
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('home')
 
-class CreateVersionView(CreateView):
+class CreateVersionView(LoginRequiredMixin, CreateView):
     model = Version
     form_class = VersionForm
     template_name = 'catalog/version_form.html'
@@ -86,7 +103,7 @@ class CreateVersionView(CreateView):
         return reverse_lazy('choose_active_version', args=[self.kwargs['product_id']])
 
 
-class ChooseActiveVersionView(View):
+class ChooseActiveVersionView(LoginRequiredMixin, View):
     template_name = 'catalog/choose_active_version.html'
 
     def get(self, request, product_id):
@@ -105,3 +122,31 @@ class ChooseActiveVersionView(View):
             version.save()
 
         return redirect('home')
+
+class CategoryCreateView(LoginRequiredMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'catalog/category_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'catalog/category_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('category-list')
+
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Category
+    template_name = 'catalog/category_confirm_delete.html'
+    success_url = reverse_lazy('home')
+
+def authentication_required_page(request):
+    return render(request, 'catalog/authentication_required_page.html')

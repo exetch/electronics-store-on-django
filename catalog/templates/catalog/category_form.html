@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{% if form.instance.pk %}Редактировать{% else %}Добавить{% endif %} категорию{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-4 mt-4 mb-4">{% if form.instance.pk %}Редактировать{% else %}Добавить{% endif %} категорию товаров</h1>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+            <button type="submit" class="btn btn-primary">
+                {% if form.instance.pk %}Сохранить{% else %}Добавить{% endif %} категорию
+            </button>
+        </form>
+    </div>
+{% endblock %}

@@ -5,18 +5,25 @@
 
 {% block content %}
 <div class="container">
-    <div class="text-center mt-4">
-        <a href="{% url 'product-create' %}" class="btn btn-primary">Добавить новый продукт</a>
+    <div class="d-flex justify-content-end">
+        {% if user.is_authenticated %}
+            <a href="{% url 'product-create' %}" class="btn btn-primary mb-3">Добавить новый товар</a>
+        {% endif %}
     </div>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div class="d-flex justify-content-end">
+        <form method="get" class="mb-4">
+            {{ category_filter_form.category }}
+        </form>
+    </div>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 text-center">
         <h1 class="display-4">Skystore</h1>
         <p class="lead">Skystore - это магазин электроники</p>
     </div>
 
-    <div class="row text-center">
+    <div class="row">
         {% for product in latest_products %}
-        <div class="col-3">
+        <div class="col-4">
             <div class="card mb-4 box-shadow">
                 <img src="{{ product.image|mediapath }}" alt="{{ product.name }}" class="card-img-top">
                 <div class="card-body">
@@ -37,5 +44,16 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    var form = document.querySelector("form");
+    var select = document.querySelector("select[name='category']");
+
+    select.addEventListener("change", function() {
+        form.submit();
+    });
+</script>
+</style>
+
 {% endblock %}
+
 
