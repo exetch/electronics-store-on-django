@@ -116,7 +116,7 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
         product = super().get_object(queryset)
         user = self.request.user
 
-        if product.user == user:
+        if product.user == user or user.is_superuser:
             return product
 
         raise Http404("Вы не имеете права удалять этот продукт.")
