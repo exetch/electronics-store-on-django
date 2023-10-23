@@ -13,6 +13,7 @@ from .forms import CustomUserLoginForm, ProfileEditForm, CustomUserRegistrationF
 from .models import CustomUser
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetDoneView, PasswordResetCompleteView
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'
@@ -37,14 +38,14 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     pass
 
-class EditProfileView(UpdateView):
+class EditProfileView(LoginRequiredMixin, UpdateView):
     model = CustomUser
     form_class = ProfileEditForm
     template_name = 'users/edit_profile.html'
     def get_success_url(self):
         return reverse_lazy('profile', args=[self.object.pk])
 
-class UserProfileView(DetailView):
+class UserProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'users/profile.html'
     context_object_name = 'user'

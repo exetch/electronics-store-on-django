@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 from users.models import CustomUser
 
 class CustomUserLoginForm(AuthenticationForm):
@@ -21,6 +22,7 @@ class CustomUserRegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field_name in self.fields:
             self.fields[field_name].widget.attrs.update({'class': 'form-control'})
+
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
