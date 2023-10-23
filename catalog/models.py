@@ -22,6 +22,17 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     date_modified = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Пользователь", related_name='products', **NULLABLE)
+    PUBLICATION_CHOICES = [
+        ('draft', 'Черновик'),
+        ('published', 'Опубликован'),
+    ]
+
+    publication_status = models.CharField(
+        max_length=10,
+        choices=PUBLICATION_CHOICES,
+        default='draft',
+        verbose_name="Статус публикации"
+    )
 
     def __str__(self):
         return self.name

@@ -15,5 +15,5 @@ urlpatterns = [
     path('product/<int:pk>/delete/', views.ProductDeleteView.as_view(), name='product-delete'),
     path('product/<int:product_id>/create_version/', views.CreateVersionView.as_view(), name='create_version'),
     path('product/<int:product_id>/choose_active_version/', views.ChooseActiveVersionView.as_view(), name='choose_active_version'),
-    path('authentication-required/', views.authentication_required_page, name='authentication_required_page'),
+    path('permission_denied/', views.permission_denied, name='permission_denied'),
 ]

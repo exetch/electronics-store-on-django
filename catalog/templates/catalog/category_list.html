@@ -6,7 +6,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="display-4 mt-4 mb-4">Список категорий товаров</h1>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and perms.catalog.add_categoty %}
                 <a class="btn btn-success" href="{% url 'category-create' %}">Добавить новую категорию</a>
             {% endif %}
         </div>
@@ -15,8 +15,10 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ category.name }}
                     <div class="btn-group" role="group">
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and perms.catalog.change_category %}
                             <a class="btn btn-primary" href="{% url 'category-update' category.pk %}">Редактировать</a>
+                        {% endif %}
+                        {% if user.is_authenticated and perms.catalog.delete_category %}
                             <a class="btn btn-danger" href="{% url 'category-delete' category.pk %}">Удалить</a>
                         {% endif %}
                     </div>
