@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 
 from catalog.models import Product, Contact, Version, Category
+from .services import get_cached_categories
 
 
 class HomeListView(ListView):
@@ -40,6 +41,8 @@ class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'categories'
     permission_required = 'catalog.view_category'
 
+    def get_queryset(self):
+        return get_cached_categories()
 
 
 class ContactListView(ListView):
