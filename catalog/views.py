@@ -2,11 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.views.decorators.cache import cache_page
+
 from .forms import ProductForm, VersionForm, CategoryForm, CategoryFilterForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from catalog.models import Product, Contact, Version, Category
+from .services import get_cached_categories
 
 
 class HomeListView(ListView):
@@ -38,6 +41,8 @@ class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'categories'
     permission_required = 'catalog.view_category'
 
+    def get_queryset(self):
+        return get_cached_categories()
 
 
 class ContactListView(ListView):
@@ -58,6 +63,7 @@ class ContactSubmitView(View):
         print(f"Телефон: {phone}")
         print(f"Сообщение: {message}")
         return render(request, self.template_name)
+
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
