@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.views.decorators.cache import cache_page
+
 from .forms import ProductForm, VersionForm, CategoryForm, CategoryFilterForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -58,6 +60,7 @@ class ContactSubmitView(View):
         print(f"Телефон: {phone}")
         print(f"Сообщение: {message}")
         return render(request, self.template_name)
+
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
